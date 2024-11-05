@@ -13,6 +13,7 @@ import {
 } from "./styles";
 import { CloseButton, ModalContainer, ModalOverlay } from "./styles";
 import { FaTimes } from 'react-icons/fa';
+import * as Yup from 'yup';
 
 export const InputForm = ({ showMessage }) => {
   const { isModalOpen, idTarefaEditando, fecharModal } = useModalContext();
@@ -22,6 +23,25 @@ export const InputForm = ({ showMessage }) => {
     data_limite: new Date().toISOString().split("T")[0]
   });
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); 
+
+  const validationSchema = Yup.object({
+    nome: Yup.string()
+      .required("O campo 'Nome' é obrigatório")
+      .min(4, "O mínimo para o nome são 4 caracteres")
+      .max(50, "O máximo para o nome são 50 caracteres"),
+    
+    custo: Yup.number()
+      .typeError("O campo 'Custo' deve ser numérico")
+      .required("O campo 'Custo' é obrigatório")
+      .min(0.1, "O custo deve ter valor mínimo de R$ 0,1"),
+    
+    data_limite: Yup.date()
+      .required("O campo 'Data limite' é obrigatório")
+      .min(today, "A data limite não pode ser anterior à data atual")
+  });
+  
   useEffect(() => {
     if (idTarefaEditando && isModalOpen) {
       axios.get(`http://127.0.0.1:8000/tarefas/${idTarefaEditando}`)
@@ -67,6 +87,7 @@ export const InputForm = ({ showMessage }) => {
               enableReinitialize
               initialValues={initialValues}
               onSubmit={handleSubmit}
+              validationSchema={validationSchema}
             >
               {({ handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
