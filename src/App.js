@@ -1,7 +1,12 @@
+import React from "react";
+import { ModalProvider } from "./utils/Modal";
+import {Home} from "./components/Home";
 
 function App() {
   return (
-   <h1>Configuração do projeto</h1>
+    <ModalProvider>
+      <Home />
+    </ModalProvider>
   );
 }
 

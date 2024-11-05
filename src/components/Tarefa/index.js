@@ -2,8 +2,6 @@ import React from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { Botao, BotaoContainer, TarefaContainer, TarefaDetalhe, TarefaInfo, TarefaNome } from './styles';
 
-
-
 const Tarefa = ({ tarefa, onExcluir, onEditar }) => {
   const destaque = tarefa.custo >= 1000;
 
