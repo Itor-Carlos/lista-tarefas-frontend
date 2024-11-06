@@ -4,64 +4,69 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
+  border-radius: 14px;
+  box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.08);
+  max-width: 650px;
   margin: 0 auto;
 `;
 
 export const FormTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #343a40;
-  margin-bottom: 20px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 24px;
+  text-align: center;
 `;
 
 export const FormFieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 `;
 
 export const Label = styled.label`
-  font-size: 1rem;
-  color: #495057;
+  font-size: 1.1rem;
+  color: #4a5568;
   margin-bottom: 8px;
 `;
 
 export const InputField = styled.input`
-  padding: 10px;
-  border: 1px solid #ced4da;
-  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #d2d6dc;
+  border-radius: 10px;
   font-size: 1rem;
   width: 100%;
   box-sizing: border-box;
+  background-color: #f7fafc;
+  transition: border-color 0.2s;
+
   &:focus {
-    border-color: #80bdff;
+    border-color: #63b3ed;
     outline: none;
   }
 `;
 
 export const ErrorText = styled.div`
-  color: #e74c3c;
+  color: #e53e3e;
   font-size: 0.875rem;
-  margin-top: 4px;
+  margin-top: 5px;
 `;
 
 export const SubmitButton = styled.button`
-  padding: 12px 24px;
+  padding: 14px 28px;
   font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
+  color: #ffffff;
+  background-color: #3182ce;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+
   &:hover {
-    background-color: #0056b3;
+    background-color: #2b6cb0;
   }
 `;
 
@@ -71,7 +76,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(44, 62, 80, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,9 +86,9 @@ export const ModalOverlay = styled.div`
 export const ModalContainer = styled.div`
   position: relative;
   background: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   width: 100%;
   z-index: 1001;
@@ -93,12 +98,13 @@ export const CloseButton = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  background: transparent;
+  background: none;
   border: none;
-  font-size: 1.2rem;
-  color: #333;
+  font-size: 1.5rem;
+  color: #6b7280;
   cursor: pointer;
+
   &:hover {
-    color: #ff0000;
+    color: #e53e3e;
   }
 `;

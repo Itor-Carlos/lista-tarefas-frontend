@@ -3,7 +3,7 @@ import axios from "axios";
 import { useModalContext } from "../../utils/Modal/index";
 import Tarefa from "../Tarefa";
 import { Message } from "../Message";
-import { HomeContainer, TarefasContainer, Titulo } from './styles';
+import { HomeContainer, TarefasContainer, Titulo, BotaoCadastrarTarefa } from './styles';
 import { InputForm } from "../Form";
 
 export const Home = () => {
@@ -39,7 +39,9 @@ export const Home = () => {
     <HomeContainer>
       {message && <Message message={message} />}
 
-      <button onClick={() => abrirModalEdicao(null)}>Criar Nova Tarefa</button>
+      <BotaoCadastrarTarefa onClick={() => abrirModalEdicao(null)}>
+    Criar Nova Tarefa
+  </BotaoCadastrarTarefa>
 
       <InputForm showMessage={showMessage} />
 

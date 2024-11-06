@@ -4,13 +4,13 @@ export const TarefaContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  margin: 8px 0;
-  border-radius: 8px;
-  background-color: ${({ destaque }) => (destaque ? '#fff3cd' : '#f8f9fa')};
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  margin: 10px 0;
+  border-radius: 10px;
+  background-color: ${({ destaque }) => (destaque ? '#fefcbf' : '#edf2f7')};
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
-  
+
   &:hover {
     transform: scale(1.02);
   }
@@ -20,33 +20,33 @@ export const TarefaInfo = styled.div`
 `;
 
 export const TarefaNome = styled.p`
-  font-weight: bold;
-  color: #343a40;
+  font-weight: 600;
+  color: #2d3748;
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 `;
 
 export const TarefaDetalhe = styled.p`
-  color: #6c757d;
+  color: #718096;
   margin: 4px 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
 `;
 
 export const BotaoContainer = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 10px;
 `;
 
 export const Botao = styled.button`
   background: none;
   border: none;
-  color: #6c757d;
-  font-size: 1.2rem;
+  color: #a0aec0;
+  font-size: 1.3rem;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s;
 
   &:hover {
-    color: #495057;
+    color: #4a5568;
   }
 
   &:focus {
