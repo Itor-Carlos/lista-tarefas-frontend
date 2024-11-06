@@ -15,7 +15,7 @@ import { CloseButton, ModalContainer, ModalOverlay } from "./styles";
 import { FaTimes } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-export const InputForm = ({ showMessage }) => {
+export const InputForm = ({ setTarefas,showMessage }) => {
   const { isModalOpen, idTarefaEditando, fecharModal } = useModalContext();
   const [initialValues, setInitialValues] = useState({
     nome: "",
@@ -68,7 +68,8 @@ export const InputForm = ({ showMessage }) => {
         await axios.put(`http://127.0.0.1:8000/tarefas/${idTarefaEditando}`, values);
         showMessage("Tarefa editada com sucesso");
       } else {
-        await axios.post('http://127.0.0.1:8000/tarefas', values);
+        const {data} = await axios.post('http://127.0.0.1:8000/tarefas', values);
+        setTarefas((tarefas) => [...tarefas, data]);
         showMessage("Tarefa criada com sucesso");
       }
       fecharModal();

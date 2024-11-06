@@ -5,6 +5,7 @@ import Tarefa from "../Tarefa";
 import { Message } from "../Message";
 import { HomeContainer, TarefasContainer, Titulo, BotaoCadastrarTarefa } from './styles';
 import { InputForm } from "../Form";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 export const Home = () => {
   const [tarefas, setTarefas] = useState([]);
@@ -35,6 +36,20 @@ export const Home = () => {
     fetchTarefas();
   }, []);
 
+  const handleDragEnd = async (result) => {
+    if (!result.destination) return;
+    const reorderedTarefas = Array.from(tarefas);
+    const [movedTarefa] = reorderedTarefas.splice(result.source.index, 1);
+    reorderedTarefas.splice(result.destination.index, 0, movedTarefa);
+
+    // Atualize a ordem no backend
+    await axios.post("http://127.0.0.1:8000/tarefas/reorder", {
+      tarefas: reorderedTarefas.map((tarefa, index) => ({ id: tarefa.id, ordem: index + 1 }))
+    });
+
+    setTarefas(reorderedTarefas);
+  };
+
   return (
     <HomeContainer>
       {message && <Message message={message} />}
@@ -43,19 +58,32 @@ export const Home = () => {
     Criar Nova Tarefa
   </BotaoCadastrarTarefa>
 
-      <InputForm showMessage={showMessage} />
+      <InputForm setTarefas={setTarefas} showMessage={showMessage} />
 
       <Titulo>Lista de Tarefas</Titulo>
-      <TarefasContainer>
-        {tarefas.map((tarefa) => (
-          <Tarefa
-            key={tarefa.id}
-            tarefa={tarefa}
-            onExcluir={onExcluir}
-            onEditar={() => abrirModalEdicao(tarefa.id)}
-          />
-        ))}
-      </TarefasContainer>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="tarefas">
+          {(provided) => (
+            <TarefasContainer {...provided.droppableProps} ref={provided.innerRef}>
+              {tarefas.map((tarefa, index) => (
+                <Draggable key={tarefa.id} draggableId={tarefa.id.toString()} index={index}>
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                      <Tarefa
+                        key={tarefa.id}
+                        tarefa={tarefa}
+                        onExcluir={onExcluir}
+                        onEditar={() => abrirModalEdicao(tarefa.id)}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </TarefasContainer>
+          )}
+        </Droppable>
+      </DragDropContext>
     </HomeContainer>
   );
 };
