@@ -58,7 +58,7 @@ export const Home = () => {
     Criar Nova Tarefa
   </BotaoCadastrarTarefa>
 
-      <InputForm setTarefas={setTarefas} showMessage={showMessage} />
+      <InputForm setTarefas={setTarefas} tarefas={tarefas} showMessage={showMessage} />
 
       <Titulo>Lista de Tarefas</Titulo>
       <DragDropContext onDragEnd={handleDragEnd}>

@@ -15,7 +15,7 @@ import { CloseButton, ModalContainer, ModalOverlay } from "./styles";
 import { FaTimes } from 'react-icons/fa';
 import * as Yup from 'yup';
 
-export const InputForm = ({ setTarefas,showMessage }) => {
+export const InputForm = ({ tarefas, setTarefas,showMessage }) => {
   const { isModalOpen, idTarefaEditando, fecharModal } = useModalContext();
   const [initialValues, setInitialValues] = useState({
     nome: "",
@@ -65,10 +65,15 @@ export const InputForm = ({ setTarefas,showMessage }) => {
   const handleSubmit = async (values) => {
     try {
       if (idTarefaEditando) {
-        await axios.put(`http://127.0.0.1:8000/tarefas/${idTarefaEditando}`, values);
+        const { data } = await axios.put(`http://127.0.0.1:8000/tarefas/${idTarefaEditando}`, values);
+        setTarefas((tarefas) =>
+          tarefas.map((tarefa) =>
+            tarefa.id === idTarefaEditando ? { ...tarefa, ...data } : tarefa
+          )
+        );
         showMessage("Tarefa editada com sucesso");
       } else {
-        const {data} = await axios.post('http://127.0.0.1:8000/tarefas', values);
+        const { data } = await axios.post('http://127.0.0.1:8000/tarefas', values);
         setTarefas((tarefas) => [...tarefas, data]);
         showMessage("Tarefa criada com sucesso");
       }
@@ -77,6 +82,7 @@ export const InputForm = ({ setTarefas,showMessage }) => {
       showMessage("Erro ao salvar a tarefa");
     }
   };
+  
 
   return (
     isModalOpen && (
